@@ -1,36 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
-import ItemList from '../../components/ItemList';
+import React from "react";
+import { useParams } from "react-router-dom";
+import ItemList from "../../components/ItemList";
+import useFareBase from "../../hooks/useFareBase";
+import Spinner from "react-bootstrap/Spinner";
 
-const ItemListContainer = ({greeting}) => {
-  const [products, setProducts] = useState([])
-  const {categoryId}  = useParams()
-  
-  useEffect(()=> {
-
-    fetch('https://fakestoreapi.com/products')
-      .then(response => {
-        return response.json()
-      })
-      .then(products => {
-        if (categoryId) {
-          const producFiltrado = products.filter(producto => producto.category === categoryId)
-          setProducts(producFiltrado)
-        } else {
-          setProducts(products)
-        }
-      })
-      .catch((err) => {
-        alert("Hubo un error")
-      });
-
-  }, [categoryId])
+const ItemListContainer = () => {
+  const { categoryId } = useParams();
+  const [products, loading, error] = useFareBase(categoryId);
 
   return (
-    <div>
-        <ItemList productos={products}/>
-    </div>
-  )
-}
+    <>
+      {error && <h1>ERROR:{error} </h1>}
+      {loading ? (
+        <Spinner animation="grow" variant="success" />
+      ) : (
+        <ItemList productos={products} />
+      )}
+    </>
+  );
+};
 
-export default ItemListContainer
+export default ItemListContainer;

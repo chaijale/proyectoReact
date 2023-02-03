@@ -1,25 +1,25 @@
-img{
-    width: 200px;
-    height: 150px;
-    border-radius: 50%;
+img {
+  width: 200px;
+  height: 150px;
+  border-radius: 50%;
 }
 .container-fluid {
-    background-color: #ffff00a6;
+  background-color: #ffff00a6;
 }
 .collapse .navbar-collapse {
-    background-color: #ffff00a6 ;
+  background-color: #ffff00a6;
 }
 
-.nav-link{
-    margin-left: 40px;
+.nav-link {
+  margin-left: 40px;
 }
 
-.widget-container{
-    width: 2rem;
-    display: flex;
-    flex-direction: row;
+.widget-container {
+  width: 2rem;
+  display: flex;
+  flex-direction: row;
 }
 
-.nav-item{
-    margin-left: 3rem;
+.nav-item {
+  margin-left: 1rem;
 }

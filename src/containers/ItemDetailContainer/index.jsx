@@ -1,32 +1,39 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
-import ItemDetail from '../../components/ItemDetail';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import ItemDetail from "../../components/ItemDetail";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../firebase/config";
 
 const ItemDetailContainer = () => {
+  const [detail, setDetail] = useState({});
+  const { id } = useParams();
 
-  const [detail, setDetail] = useState({})
-  const {id} = useParams()
+  useEffect(() => {
+    const getProduct = async () => {
+      const docRef = doc(db, "products", id);
+      const docSnap = await getDoc(docRef);
 
-  useEffect(()=> {
-
-    fetch(`https://fakestoreapi.com/products/${id}`)
-      .then(response => {
-        return response.json()
-      })
-      .then(json => {
-        setDetail(json)
-      })
-      .catch((err) => {
-        alert("Hubo un error")
-      });
-
-  }, [id])
+      if (docSnap.exists()) {
+        const productDetail = {
+          id: docSnap.id,
+          ...docSnap.data(),
+        };
+        setDetail(productDetail);
+      } else {
+      }
+    };
+    getProduct();
+  }, [id]);
 
   return (
     <div>
-        <ItemDetail detail={detail}/>
+      {Object.keys(detail).length === 0 ? (
+        <h3>Cargando...</h3>
+      ) : (
+        <ItemDetail detail={detail} />
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default ItemDetailContainer
+export default ItemDetailContainer;
