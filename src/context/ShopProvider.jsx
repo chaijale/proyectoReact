@@ -38,7 +38,6 @@ const ShopProvider = ({ children }) => {
     for (const product of products) {
       total += product.price * product.quantity;
     }
-    console.log(total);
     return total;
   };
 
