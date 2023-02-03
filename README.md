@@ -1,6 +1,6 @@
 # bolucompra
 
-BoluCompra es un aplicacion web realizada atravez de react
+BoluCompra es un aplicacion web realizada atravez de react, simulando un e-comerce donde el cliente pueda interactuar, navegando por las diferentes categorias de productos, agregando y sacando elementos del carrito y  un simulador de compras donde el cliente recibe un ID de su compra.
 
 ## Instalacion y uso
 
